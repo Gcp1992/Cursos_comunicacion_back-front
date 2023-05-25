@@ -1,4 +1,4 @@
-package com.softtek.cursos.controlador;
+package com.softtek.cursos.excepciones;
 
 import com.softtek.cursos.excepciones.CursoFoundException;
 import com.softtek.cursos.excepciones.ErrorDTO;
@@ -30,6 +30,16 @@ public class ControllerAdvice {
         error.setMessage(ex2.getMessage());
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(value = CursosNotFoundException.class)
+    public ResponseEntity<ErrorDTO> runtimeExceptionHandler(CursosNotFoundException ex3){
+        ErrorDTO error = new ErrorDTO();
+        error.setCode("Error 500");
+        error.setMessage(ex3.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 
 
 }
